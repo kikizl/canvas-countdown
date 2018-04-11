@@ -5,35 +5,20 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>Canvas Tutorial</title>
-        <script>
-            function draw(){
-                var canvas = document.getElementById('tutorial');
-
-                // canvas.width = 1024;
-                // canvas.height = 768;
-                if (canvas.getContext){ 
-                    // 判断浏览器是否支持canvas
-                    var ctx = canvas.getContext('2d');
-
-                // canvas基于状态绘制
-                ctx.lineWidth = 5;
-                ctx.strokeStyle = "#005588";
-                ctx.arc(300,300,200,0,0.5*Math.PI,true);
-                ctx.stroke();
-
-                    
-                }            
-            }
-        </script>
         <style>
             canvas { 
-                border: 1px solid black; 
+                /* border: 1px solid black;  */
                 display: block;
                 margin: 50px auto;
             }
         </style>
     </head>
     <body onload="draw();">
-        <canvas id="tutorial" width="1024" height="768"></canvas>
+        <canvas id="tutorial">
+            当前浏览器不支持Canvas，请更换浏览器后再试
+        </canvas>
+
+        <script src="digit.js"></script>
+        <script src="countdown.js"></script>
     </body>
 </html>
