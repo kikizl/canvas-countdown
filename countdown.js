@@ -15,6 +15,16 @@ var balls = [];
 const colors = ["#33b5e5","#0099cc","#aa66cc","#9933cc","#99cc00","#669900","#ffbb33","ffbb8800","#ff4444","#cc0000"];
 
 window.onload = function(){
+    // 自适应
+    WINDOW_WIDTH = document.documentElement.clientWidth;
+    WINDOW_HEIGHT = document.documentElement.clientHeight;
+    console.log(document.body.clientHeight);
+
+    MARGIN_LEFT = Math.round(WINDOW_WIDTH/10); // 四舍五入取整
+    RADIUS = Math.floor(WINDOW_WIDTH*4/5/108)-1; // 所有数字站(93+15)*(RADIUS+1)
+
+    MARGIN_TOP = Math.round(WINDOW_HEIGHT/5);
+
     let canvas = document.getElementById('tutorial');
     let ctx = canvas.getContext('2d');
 
@@ -101,6 +111,18 @@ function updateBalls(){
             balls[i].vy = -balls[i].vy*0.75; // 0.75是摩擦系数，模拟空气阻力
         }  
     }
+
+    // 优化，清除不在画布区域的小球
+    let cnt = 0;
+    for(let i=0; i<balls.length; i++){
+        if(balls[i].x+RADIUS > 0 && balls[i].x-RADIUS < WINDOW_WIDTH){
+            balls[cnt++] = balls[i];
+        }
+    }
+    while(balls.length > Math.min(300,cnt)){
+        balls.pop();
+    }
+
 }
 
 // 添加小球
@@ -157,7 +179,6 @@ function render(ctx){
         ctx.closePath();
         ctx.fill();
     }
-    
 }
 
 // 渲染单个数字
