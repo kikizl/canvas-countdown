@@ -4,10 +4,6 @@ var RADIUS = 8;
 var MARGIN_TOP = 60;
 var MARGIN_LEFT = 30;
 
-// endTime，设定在今天之后的时间，因为限制小时为两位，所以必须是4天以内
-// const endTime = new Date(2018, 3, 12, 18, 47, 52); // 坑啊！！！！new Date，js中，月份是从0开始，0表示1月，3表示4月
-var endTime =  new Date();
-endTime.setTime(endTime.getTime() + 3600 * 1000); // 使用 setTime() 向 1970/01/01 添加毫秒，并显示新的日期和时间。
 var curShowTimeSeconds = 0;
 
 // 设计一个数据结构，存储小球
@@ -45,13 +41,12 @@ window.onload = function(){
     );
 }
 
-// 获取时间距离（以秒为单位）
+// 获取当前时间（以秒为单位）
 function getCurrentShowTimeSeconds(){
     let curTime = new Date();
-    let ret = endTime.getTime() - curTime.getTime(); // 毫秒。getTime()返回距 1970 年 1 月 1 日之间的毫秒数。
-    ret = Math.round(ret/1000);  // 秒。Math.round(x)，与x最接近的整数。对于0.5，该方法将进行上舍入。
+    let ret = curTime.getHours() * 3600 + curTime.getMinutes() * 60 + curTime.getSeconds(); // 毫秒。getTime()返回距 1970 年 1 月 1 日之间的毫秒数。
     
-    return ret >= 0 ? ret : 0; // 判断设定时间和目前时间的距离是否为正
+    return ret; 
 }
 
 // 定时更新
